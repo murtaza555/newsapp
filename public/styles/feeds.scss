@@ -1,0 +1,102 @@
+.post {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    border-bottom: solid 1px #666;
+    margin-bottom: 20px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    background-color: white;
+
+    &:active {
+        background-color: white;
+    }
+
+    h3 {
+        padding: 10px 0;
+        color: black;
+        word-break: break-word;
+    }
+
+    .post-meta {
+        min-height: 30px;
+        height: fit-content;
+        justify-content: space-between;
+        padding: 0 10px;
+        box-sizing: border-box;
+
+        .post-meta-data {
+            align-items: center;
+            color: black;
+        }
+
+        .icon {
+            height: 30px;
+            width: 30px;
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+
+        .thumb_up_alt {
+            color: $likeIcon;
+        }
+
+        .remove_red_eyevisibility {
+            color: $eyeIcon;
+        }
+    }
+
+    .post-img {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        background-image: url(/res/loaders/spinning-circles.svg);
+        background-color: white;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .post-img-blur {
+        background-size: cover !important;
+        filter: blur(10px);
+        overflow: hidden;
+    }
+
+    .post-img-real {
+        background-size: contain;
+        z-index: 1;
+    }
+
+    .post-img-real,
+    .post-img-blur {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    .actions {
+        position: absolute;
+        height: 40px;
+        width: fit-content;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 0 4px 4px 0;
+        z-index: 1;
+
+        .icon {
+            height: 40px;
+            width: 40px;
+            color: black;
+
+            &:active {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+        }
+    }
+}

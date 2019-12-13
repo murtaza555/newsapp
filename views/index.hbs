@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- og graph -->
+
+    {{#og}}
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:type" content="{{type}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="description" content="{{description}}">
+    {{#author}}
+    <meta property="article:author" content="{{.}}">
+    {{/author}}
+    {{#publisher}}
+    <meta property="article:publisher" content="{{.}}">
+    {{/publisher}}
+    {{#image}}
+    <meta property="og:image" content="{{.}}">
+    {{/image}}
+    <meta property="og:site_name" content="{{site_name}}">
+    {{/og}}
+
+    <!-- og graph -->
+
+    <link rel="shortcut icon" href="/res/logo/logo.ico" type="image/x-icon">
+
+    <link rel="manifest" href="/res/manifest.json">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/res/icons/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <script src="/js/index.js"></script>
+    <title>{{title}}</title>
+</head>
+
+<body>
+    <div id="loader" class="loading">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <header>
+        <div class="bar flex logo-container">
+            <button class="icon menu" id="sidenavToggler"></button>
+            <a href="/" id="logo"></a>
+        </div>
+        <nav class="bar flex">
+            {{#links}}
+            <a action="filter post" href="{{link}}">{{text}}</a>
+            {{/links}}
+            <div class="group">
+                <span role="button" id="datepicker" class="icon insert_invitationevent"></span>
+            </div>
+        </nav>
+        <span id="title"></span>
+    </header>
+    <main></main>
+    <button class="load-more" id="load-feeds" data-page="1">load more...</button>
+    <footer>
+        <div class="bar flex">
+            <div class="col flex">
+                <strong>contact:</strong>
+                <span>Shrichand Makhija</span>
+                <a href="tel:+9198278115714">+9198278115714</a>
+            </div>
+        </div>
+        <div class="bar flex">
+            &copy; Redeye News 2019. All rights reserved
+        </div>
+    </footer>
+    <nav>
+        {{#recents}}
+        <a hidden href="{{link}}">{{title}}</a>
+        {{/recents}}
+    </nav>
+    <div id="toastContainer"></div>
+</body>
+
+</html>

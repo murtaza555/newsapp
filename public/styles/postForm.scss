@@ -1,0 +1,122 @@
+#post {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+    .title {
+        font-size: 1.2em;
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    textarea {
+        border-radius: 4px;
+        margin: 10px 0;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .form-group {
+        margin-top: 10px;
+
+        select {
+            height: 40px;
+            min-width: 50%;
+            width: fit-content;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 0 2px rgba($color: #26274d, $alpha: 0.3);
+            background-color: white;
+            cursor: default;
+        }
+
+        button {
+            max-width: 200px;
+            width: fit-content;
+            min-width: 150px;
+            margin: auto;
+            margin-right: 0;
+        }
+    }
+
+    #post-body {
+        position: relative;
+        border: solid 1px #ccc;
+        border-radius: 4px;
+        height: fit-content;
+        margin: 10px 0;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        #description {
+            flex: 1;
+            height: fit-content;
+            min-width: 100%;
+            max-width: 100%;
+            width: fit-content;
+            padding: 5px;
+            box-sizing: border-box;
+            // white-space: pre;
+            max-height: 50vh;
+            overflow: hidden;
+            overflow: auto;
+            cursor: text;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .tools {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: #eee;
+            display: flex;
+            flex-wrap: wrap;
+
+            .group {
+                display: flex;
+            }
+
+            input {
+                height: 30px !important;
+                width: 30px !important;
+                text-align: center;
+                margin: 5px;
+                box-sizing: border-box;
+
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            }
+
+            input:disabled {
+                background-color: transparent;
+                border: none;
+                color: white;
+            }
+
+            input[type=color],
+            .icon {
+                flex-shrink: 0;
+                height: 40px;
+                width: 40px;
+                font-size: 1.4em;
+                border: none;
+                background-color: transparent;
+
+                &.activated,
+                &:active {
+                    background-color: darken($color: $primaryColor, $amount: 10);
+                    color: white;
+                }
+            }
+        }
+    }
+}

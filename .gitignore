@@ -1,0 +1,6 @@
+node_modules
+build
+.env
+storage/images/*
+
+!storage/images/default.jpeg

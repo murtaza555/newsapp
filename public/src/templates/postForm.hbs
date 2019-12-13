@@ -1,0 +1,60 @@
+<form action="#" id="post">
+    <div class="title">Add a new post</div>
+    <div class="form-group bar flex">
+        <select name="category" id="category">
+            {{#category}}
+            <option value="{{category}}">{{category}}</option>
+            {{/category}}
+        </select>
+        <button type="button" id="addcategory">new category</button>
+    </div>
+
+    <textarea name="title" id="title" rows="1" placeholder="post title" required></textarea>
+    <div id="post-body">
+        <div class="tools bar flex">
+            <div class="group">
+                <i action="undo" class="icon undo"></i>
+                <i action="redo" class="icon redo"></i>
+            </div>
+
+            <label action="insertImage" class="icon insert_photoimagephoto">
+                <input type="file" name="image" id="image" accept="image/png, image/gif, image/jpeg" hidden>
+            </label>
+
+            <div class="group">
+                <i action="insertOrderedList" class="icon format_list_numbered"></i>
+                <i action="insertUnorderedList" class="icon format_list_bulleted"></i>
+            </div>
+
+            <i action="bold" class="icon format_bold"></i>
+            <i action="italic" class="icon format_italic"></i>
+            <i action="underline" class="icon format_underlined"></i>
+            <i action="strikeThrough" class="icon strikethrough_s"></i>
+
+            <i action="embed" class="icon code"></i>
+            <i action="createLink" class="icon linkinsert_link"></i>
+            <i action="unlink" class="icon link_off"></i>
+            <i action="formatBlock" class="icon format_quote"></i>
+
+            <i action="justifyCenter" class="icon format_align_center"></i>
+            <i action="justifyFull" class="icon format_align_justify"></i>
+            <i action="justifyLeft" class="icon format_align_left"></i>
+            <i action="justifyRight" class="icon format_align_right"></i>
+
+            <label class="icon format_color_fill">
+                <input type="color" name="bgColor" id="bgColor" hidden>
+            </label>
+            <label class="icon format_color_text">
+                <input type="color" name="fontColor" id="fontColor" hidden>
+            </label>
+            <i action="fontSize" class="icon format_size" data-val="3"></i>
+
+
+            <i action="removeFormat" class="icon loopsync"></i>
+        </div>
+        <div id="description" contenteditable="true"></div>
+    </div>
+    <div class="button-container">
+        <button type="submit">submit</button>
+    </div>
+</form>
