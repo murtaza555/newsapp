@@ -1,1 +1,3 @@
-# AmWeb Simple new management system
+# Newsapp
+
+Simple news management system
