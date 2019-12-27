@@ -9,7 +9,6 @@
 @import './account.scss';
 @import './readPost.scss';
 @import './manage-category.scss';
-
 html,
 body,
 div,
@@ -42,7 +41,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: white;
     height: calc(100% - 150px);
-
     >header {
         position: fixed;
         top: 0;
@@ -50,13 +48,11 @@ body {
         width: 100%;
         z-index: 2;
         border-bottom: solid 1px #827b7b8c;
-
         nav {
             margin: auto;
             height: 40px;
             justify-content: center;
             background-color: white;
-
             .group,
             span,
             a {
@@ -67,19 +63,15 @@ body {
                 margin-left: 10px;
                 cursor: pointer;
             }
-
             .group {
                 margin-right: 0;
                 margin-left: auto;
-
                 .icon {
                     margin: 0;
                 }
             }
-
             .icon {
                 font-size: 1.5em;
-
                 &:not(:first-of-type) {
                     margin-left: 0;
                 }
@@ -99,12 +91,10 @@ main {
     box-sizing: border-box;
     margin: auto;
     min-height: calc(100% - 100px);
-
     &:empty {
         display: flex;
         align-items: center;
         justify-content: center;
-
         &::before {
             content: 'Nothing to show!';
             font-size: 2em;
@@ -118,34 +108,26 @@ aside {
     padding: 0 20px;
     font-style: italic;
     background-color: #ddd !important;
-
     * {
         background-color: inherit !important;
     }
-
     br:last-child {
         display: none;
     }
-
     &.first {
         padding-top: 20px;
         border-radius: 4px 4px 0 0;
-
         &::before {
             content: '❝ ';
         }
     }
-
     &.last {
         padding-bottom: 20px;
         border-radius: 0 0 4px 4px;
-
         &::after {
             content: ' ❞';
         }
     }
-
-
     &::before,
     &::after {
         font-weight: 900;
@@ -191,7 +173,6 @@ input {
     user-select: none;
     height: 40px;
     width: 40px;
-
     &.logo {
         height: 40px;
         width: 40px;
@@ -204,7 +185,6 @@ input {
 
 a {
     text-decoration: none;
-
     &:active {
         background-color: rgba($color: #000000, $alpha: 0.2);
     }
@@ -216,19 +196,15 @@ button {
     border: none;
     transition: all 100ms linear;
     font-size: 0.9em;
-
     &.icon {
         background-color: transparent;
-
         &:focus {
             outline: none;
         }
-
         &:active {
             transform: scale(0.8);
         }
     }
-
     &:not(.icon) {
         min-height: 40px;
         min-width: 80px;
@@ -236,12 +212,10 @@ button {
         font-size: 1em;
         padding: 10px;
         box-sizing: border-box;
-
         &:hover {
             background-color: darken($color: $primaryColor, $amount: 10) !important;
         }
     }
-
     &.loading {
         color: transparent;
         pointer-events: none;
@@ -250,35 +224,29 @@ button {
         background-position: center;
         background-size: contain;
     }
-
     &.load-more {
         background-color: white;
         color: #66f;
         margin-bottom: 10px;
         width: 100%;
         cursor: pointer;
-
         &:hover {
             background-color: white !important;
         }
-
         &:focus {
             outline: none;
         }
     }
 }
 
-
 footer {
     padding: 10px;
     background-color: $primaryColor;
     color: white;
-
     a {
         color: #ccf;
         text-transform: capitalize;
     }
-
     .bar {
         min-height: 40px;
         justify-content: center;
@@ -291,6 +259,7 @@ footer {
     width: 100%;
     justify-content: center;
     color: white;
+    min-height: 77px;
 }
 
 #sidenavToggler {
@@ -323,29 +292,25 @@ footer {
     color: white;
     width: 250px;
     margin: auto;
-    height: 60px;
+    height: 75px;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 120px;
     background-position: center;
-    background-image: url(/res/logo/logo.png);
+    background-image: url(/res/logo/logo1.png);
 }
 
 .button-container {
     display: flex;
     height: $dialogBtnHeight;
     width: 100%;
-
     user-select: none;
-
     &.disabled {
         pointer-events: none;
-
         input,
         button {
             opacity: 0.6;
         }
     }
-
     >button {
         flex: 1;
         display: inline-flex;
@@ -353,17 +318,14 @@ footer {
         justify-content: center;
         border: none;
         color: white;
-
         &:focus {
             outline: none;
         }
-
         &:hover,
         &:active {
             transition: all 100ms ease;
             background-color: rgba($color: #000099, $alpha: 0.2);
         }
-
         &:disabled {
             opacity: 0.6;
         }
@@ -371,7 +333,6 @@ footer {
 }
 
 @media screen and (max-width: 1000px) {
-
     #__DatePicker {
         top: 50% !important;
         bottom: auto !important;
@@ -379,23 +340,18 @@ footer {
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
     }
-
     body {
         margin-top: 110px;
     }
-
     #sidenavToggler {
         display: flex;
     }
-
     #logo {
-        width: 150px;
+        width: 120px;
     }
-
     main {
         min-height: calc(100% - 60px);
     }
-
     header nav {
         position: fixed;
         align-items: center;
@@ -413,11 +369,9 @@ footer {
         margin: 0 !important;
         transform: translate3d(-100%, 0, 0);
         transition: all 300ms ease;
-
         &.show {
             transform: translate3d(0, 0, 0);
         }
-
         .group,
         span,
         a {

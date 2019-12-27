@@ -11,9 +11,11 @@
     "webpack-cli": "^3.3.8"
   },
   "dependencies": {
+    "ajax-request": "^1.2.3",
     "autoprefixer": "^9.6.1",
     "autosize": "^4.0.2",
     "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
     "compressorjs": "^1.0.6",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
@@ -22,6 +24,7 @@
     "html-datepicker-js": "1.1.31",
     "html-tag-js": "0.0.19",
     "ip": "^1.1.5",
+    "jquery": "^3.4.1",
     "mustache": "^3.1.0",
     "mysql": "^2.17.1",
     "node-sass": "^4.12.0",

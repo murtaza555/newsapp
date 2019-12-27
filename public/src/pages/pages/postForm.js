@@ -24,7 +24,7 @@ function Post() {
     let $form;
 
     const page = Page(`${app.name} - admin`);
-    page.beforeHide = function () {
+    page.beforeHide = function() {
         if ($form) {
             const body = $form.get('#description').innerHTML;
             const title = $form.get('#title').value;
@@ -93,11 +93,11 @@ function Post() {
 
         autosize($form.get('#title'));
 
-        $addCategory.onclick = function (e) {
+        $addCategory.onclick = function(e) {
             addCategory.bind(this)(e, $category);
         };
 
-        $form.onsubmit = function (e) {
+        $form.onsubmit = function(e) {
             submit.bind(this)(e, $form, $category);
         };
     }
@@ -207,13 +207,22 @@ function submit(e, $form, $category) {
         category: null,
         title: null,
         body: null,
-        images: []
+        images: [],
+        views1: null,
+        likes1: null
     };
     const $body = $form.get('#description');
     const $title = $form.get('#title');
+    let $viewsinput1 = $form.get('#viewsinput');
+    let $likesinput1 = $form.get('#likesinput');
+
+
 
     data.category = $category.value;
     data.title = $title.value;
+    data.likes1 = $likesinput1.value;
+    data.views1 = $viewsinput1.value;
+
 
     const parsedBody = parseBody($body);
 
@@ -253,6 +262,8 @@ function submit(e, $form, $category) {
             if (res.status === 'ok') {
                 $body.textContent = '';
                 $title.value = '';
+                $likesinput1.value = '';
+                $viewsinput1.value = '';
                 Toast(res.msg);
 
             } else if (res.status === 'error') {

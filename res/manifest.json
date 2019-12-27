@@ -1,11 +1,11 @@
 {
-    "name": "Redeye News Portal",
-    "short_name": "Redeye News",
+    "name": "NewsGarden Portal",
+    "short_name": "NewsGarden",
     "start_url": "/",
     "background_color": "#37506b",
     "description": "Read news, article and watch videos online",
     "icons": [{
-        "src": "/res/logo/144.png",
+        "src": "/res/logo/logo1.png",
         "sizes": "144x144",
         "type": "image/png"
     }],

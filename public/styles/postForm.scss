@@ -2,24 +2,20 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
-
     .title {
         font-size: 1.2em;
         width: 100%;
         text-align: center;
         font-weight: bold;
     }
-
     textarea {
         border-radius: 4px;
         margin: 10px 0;
         padding: 10px;
         box-sizing: border-box;
     }
-
     .form-group {
         margin-top: 10px;
-
         select {
             height: 40px;
             min-width: 50%;
@@ -30,7 +26,6 @@
             background-color: white;
             cursor: default;
         }
-
         button {
             max-width: 200px;
             width: fit-content;
@@ -39,7 +34,6 @@
             margin-right: 0;
         }
     }
-
     #post-body {
         position: relative;
         border: solid 1px #ccc;
@@ -50,7 +44,6 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-
         #description {
             flex: 1;
             height: fit-content;
@@ -64,12 +57,10 @@
             overflow: hidden;
             overflow: auto;
             cursor: text;
-
             &:focus {
                 outline: none;
             }
         }
-
         .tools {
             position: sticky;
             top: 0;
@@ -77,31 +68,26 @@
             background-color: #eee;
             display: flex;
             flex-wrap: wrap;
-
             .group {
                 display: flex;
             }
-
             input {
                 height: 30px !important;
                 width: 30px !important;
                 text-align: center;
                 margin: 5px;
                 box-sizing: border-box;
-
                 &::-webkit-outer-spin-button,
                 &::-webkit-inner-spin-button {
                     -webkit-appearance: none;
                     margin: 0;
                 }
             }
-
             input:disabled {
                 background-color: transparent;
                 border: none;
                 color: white;
             }
-
             input[type=color],
             .icon {
                 flex-shrink: 0;
@@ -110,7 +96,6 @@
                 font-size: 1.4em;
                 border: none;
                 background-color: transparent;
-
                 &.activated,
                 &:active {
                     background-color: darken($color: $primaryColor, $amount: 10);
@@ -118,5 +103,23 @@
                 }
             }
         }
+    }
+    .likes_and_views {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .viewsinputclass {
+        width: 80%;
+        height: 30px;
+        margin-left: 14px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .likesinputclass {
+        width: 80%;
+        height: 30px;
+        margin-left: 18px;
+        margin-right: 10px;
+        margin-bottom: 25px;
     }
 }

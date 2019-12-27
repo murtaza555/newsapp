@@ -10,7 +10,9 @@ function savepost(req, res) {
         images,
         body,
         title,
-        category
+        category,
+        likes1,
+        views1
     } = req.body;
     if (!body || !title || !category || !images) {
         return res.send({
@@ -72,8 +74,8 @@ function savepost(req, res) {
     function save() {
         movedImages = JSON.stringify(movedImages);
 
-        const query = 'insert into posts (post_id, title, body, category, images) values(?, ?, ?, ?, ?)';
-        con.query(query, [postID, title, body, category, movedImages], (err, result) => {
+        const query = 'insert into posts (post_id, title, body, category, images,views,likes) values(?, ?, ?, ?, ?, ?, ?)';
+        con.query(query, [postID, title, body, category, movedImages, views1, likes1], (err, result) => {
             if (err) {
                 let msg = 'Unable to proccess your request, please try again later';
                 let errorCode = 'DB_ERR';

@@ -1,12 +1,17 @@
 //#region importing modules
 const dotenv = require('dotenv');
 const path = require('path');
+const bcrypt = require('bcrypt');
+
 const express = require('express');
 const mysql = require('mysql');
 const cookieParser = require('cookie-parser');
 const compileScss = require('./server/utils/compileSCSS');
 const validate = require('./server/utils/validate');
 const getPost = require('./server/utils/getPost.js');
+let bodyparser = require('body-parser');
+
+let urlencodedparser = bodyparser.urlencoded({ extended: false });
 
 //#endregion
 
@@ -16,7 +21,7 @@ const ip = require('ip').address();
 const res = path.join(__dirname, 'res');
 const js = path.join(__dirname, 'public', 'js');
 const app = express();
-const PORT = process.env.PORT || 8006;
+const PORT = process.env.PORT || 2006;
 const con = mysql.createConnection({
     host: process.env.host,
     user: process.env.user,
@@ -57,10 +62,302 @@ app.get('/styles/*', (req, res) => {
     compileScss(url, res);
 });
 
+
+
+var finalcount;
+var initalcount;
+var today = new Date();
+var dd = today.getDate();
+let date11;
+let initalcount1
+let finalcount1;
+var dater;
+var check = 0;
+var mm = today.getMonth() + 1;
+var yyyy = today.getFullYear();
+if (dd < 10) {
+    dd = '0' + dd;
+}
+
+if (mm < 10) {
+    mm = '0' + mm;
+}
+today = dd + '/' + mm + '/' + yyyy;
+
+
+app.post('/updatevisit', function(req, res) {
+
+
+
+    con.query("SELECT visitcount FROM assects", function(err, rows, fields) {
+        // let check1 = rows.filter(function(element) {
+        //     initalcount = element.visitcount;
+        //     finalcount = initalcount + 1;
+        //     check = 1;
+
+
+        // })
+
+        initalcount = rows[0].visitcount
+        finalcount = initalcount + 1;
+
+        con.query('UPDATE assects SET visitcount = ? WHERE  visitcount = ?', [finalcount, initalcount], function(err, rows, fields) {
+
+
+
+        });
+
+
+
+
+        con.query("SELECT monthlyvisit,date1 FROM assects", function(err, rows, fields) {
+
+
+
+            let check2 = rows.filter(function(element) {
+                dater = element.date1
+
+                initalcount1 = element.monthlyvisit;
+                finalcount1 = initalcount1 + 1;
+
+                if (dater === today) {
+
+
+                    check = 5;
+
+
+                }
+
+            })
+            if (check === 5) {
+
+                con.query('UPDATE assects SET monthlyvisit = ? WHERE  date1 = ?', [finalcount1, today], function(err, rows, fields) {
+
+
+                });
+            }
+            if (check !== 5) {
+
+                con.query('INSERT INTO assects(monthlyvisit,date1) VALUES( ? , ? )', [0, today], function(err, rows, fields) {
+
+                });
+
+            }
+        })
+
+
+
+
+
+        if (check === 2) {
+
+            res.send({
+                status: 'ok',
+            });
+
+        }
+        if (check === 0) {
+
+            res.send({
+                status: 'no',
+            });
+
+        }
+
+    });
+})
+let totalvisitcount = 0;
+check12 = 0;
+
+app.post('/murtaza_admin_list_delete', function(req, res) {
+    let delete_user = req.body.delete;
+    if (req.body.delete === 'admin') {
+        res.send({
+            status: 'no_admin',
+            msg: 'Account of admin',
+
+
+
+        });
+    } else {
+
+        con.query("DELETE FROM users Where user_id = ?", [delete_user], function(err, rows, fields) {
+            res.send({
+                status: 'ok',
+                msg: 'deletion done',
+
+
+
+            });
+
+
+        });
+
+
+    }
+})
+
+app.post('/murtaza_admin_list_add', function(req, res) {
+
+    let password124 = bcrypt.hashSync(req.body.password123, 10);
+
+
+
+    con.query("insert into users (user_id, name, email, password) values(?, ?, ?, ?);", [req.body.user_id123, req.body.name123, req.body.email123, password124], (err) => {
+        if (err) {
+            res.send({
+                status: 'no',
+            });
+        } else {
+            res.send({
+                status: 'ok',
+            });
+        }
+    });
+
+})
+
+
+let visitnumberdate = 0;
+let visitnumbermonth = 0;
+let visitnumberyear = 0;
+
+app.post('/murtaza_monthvisit_get', function(req, res) {
+
+    con.query("SELECT monthlyvisit,date1 FROM assects", function(err, rows, fields) {
+
+
+        if (req.body.monthvisit123.length === 10) {
+
+
+            rows.filter(function(element) {
+
+                if (req.body.monthvisit123 === element.date1) {
+                    visitnumberdate = element.monthlyvisit;
+
+                }
+
+
+
+
+            })
+            if (err) {
+                res.send({
+                    status: 'no',
+                });
+            } else {
+                res.send({
+                    status: 'ok',
+                    visitnumber1: visitnumberdate
+                });
+            }
+        } else if (req.body.monthvisit123.length === 7) {
+
+            let takemonth = req.body.monthvisit123;
+            rows.filter(function(element) {
+
+                if (element.date1 !== null) {
+                    var res = element.date1.substring(3, );
+                    if (res === takemonth) {
+
+                        visitnumbermonth = visitnumbermonth + element.monthlyvisit;
+                    }
+                }
+            })
+
+            if (err) {
+                res.send({
+                    status: 'no',
+                });
+            } else {
+                res.send({
+                    status: 'ok',
+                    visitnumber1: visitnumbermonth
+                });
+            }
+
+        } else if (req.body.monthvisit123.length === 4) {
+
+            let takeyear = req.body.monthvisit123;
+            rows.filter(function(element) {
+                if (element.date1 !== null) {
+
+                    var res1 = element.date1.substring(6, );
+                    if (res1 === takeyear) {
+                        visitnumberyear = visitnumberyear + element.monthlyvisit;
+                    }
+                }
+            })
+
+            if (err) {
+                res.send({
+                    status: 'no',
+                });
+            } else {
+                res.send({
+                    status: 'ok',
+                    visitnumber1: visitnumberyear
+                });
+            }
+        } else {
+            if (err) {
+                res.send({
+                    status: 'no',
+                });
+            }
+        }
+
+
+    })
+
+})
+
+app.post('/murtaza_admin_list', function(req, res) {
+
+
+    con.query("SELECT visitcount FROM assects", function(err, rows, fields) {
+
+        totalvisitcount = rows[0].visitcount;
+        check12 = 1;
+
+        con.query("SELECT name,user_id FROM users", function(err, rows, fields) {
+
+            let nameList = rows;
+
+
+
+
+
+            res.send({
+                status: 'ok',
+                errorCode: 'visitcount error',
+                msg: 'total vissit count til date',
+                totalvisitcount: totalvisitcount,
+                namelist: nameList
+
+
+            });
+
+        });
+
+
+    });
+
+
+
+
+
+})
+
+
+
 app.get('/img/*/*', (req, res) => {
     const name = req.params[0] + req.params[1];
     res.sendFile(path.join(__dirname, 'storage', 'images', name));
 });
+
+
+
 
 app.route('/post(/*)?')
     .post((req, res) => {
@@ -115,7 +412,7 @@ app.route('/post(/*)?')
         function success(user) {
             if (user.user_id !== 'admin') return res.send({
                 status: 'error',
-                msg: 'Not a vliad user'
+                msg: 'Not a valid user'
             });
 
             const moveTo = req.body.moveTo;
@@ -353,7 +650,7 @@ app.get('/*', (req, res) => {
     }
 
     function successAdmin(result) {
-        if (result.user_id !== 'admin') return errorAdmin();
+        // if (result.user_id !== 'admin_taha') return errorAdmin();
         render();
     }
 
@@ -410,11 +707,11 @@ app.get('/*', (req, res) => {
                 }
 
                 let og = {
-                    title: 'Redeye News',
+                    title: 'NewsGarden',
                     type: 'website',
-                    description: 'Read recent news, watch videos on Redeye News and get updated.',
-                    image: req.baseUrl + '/res/logo/logo.png',
-                    site_name: 'Redeye News'
+                    description: 'Read recent news, watch videos on NewsGarden and get updated.',
+                    image: req.baseUrl + '/res/logo/logo1.png',
+                    site_name: 'NewsGarden'
                 };
 
                 if (req.params[0] && /\d{13}.*/.test(req.params[0])) {
@@ -435,9 +732,9 @@ app.get('/*', (req, res) => {
                             }
                             og = {
                                 title: post.title,
-                                description: 'Read this article/news on redeyenews.com, visit now to read article',
+                                description: 'Read this article/news on NewsGarden, visit now to read article',
                                 image: thumbnail,
-                                site_name: 'Redeye News'
+                                site_name: 'NewsGarden'
                             };
                         }
 
@@ -450,7 +747,7 @@ app.get('/*', (req, res) => {
 
                 function send() {
                     res.render('index', {
-                        title: 'REDEYE NEWS',
+                        title: 'NewsGarden',
                         links,
                         recents,
                         og

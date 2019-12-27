@@ -1,5 +1,6 @@
 import template from '../templates/admin.hbs';
 import tag from 'html-tag-js';
+import mustache from 'mustache';
 import Page from '../components/page';
 import pages from './pages/admin-pages';
 import ajax from '../libs/ajax';
@@ -17,11 +18,13 @@ function Admin(args, currentPage) {
     const page = Page(app.name + ' - admin');
     page.show();
 
-    const nav = tag.parse(template);
+    const nav = tag.parse(mustache.render(template, {
+        mainAdmin: cookies()['user'] === 'admin'
+    }));
     const links = [...nav.children];
 
     links.map(link => {
-        link.onclick = function (e) {
+        link.onclick = function(e) {
             e.preventDefault();
             if (this.id !== 'logout') setLocation(this.href);
             else {

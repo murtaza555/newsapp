@@ -1,0 +1,55 @@
+<div>
+   
+    <ul>
+    {{#adminList}}
+    <li>
+        {{#.}}
+        <span class="name">{{name}}</span>
+        <button class="delete"  id="{{user_id}}">delete</button>
+        {{/.}}
+    </li>
+
+   
+    {{/adminList}}
+    </ul>
+
+
+
+
+
+
+    <label for="user_id1" style="margin-top:10px;">User_id.</label>
+    <input type="text" id="user_id" name="user_id"  style="margin-top:7px; padding:7px;border:1px solid black;">
+    <br />
+    <label for="name1" style="margin-top:7px;">Name.....</label>
+    <input type="text" name="name" id="name"  style="margin-top:7px;padding:7px;border:1px solid black;">
+        <br />
+
+    <label for="email1" style="margin-top:7px;">Email.....</label>
+    <input type="email" name="email" id="email"  style="margin-top:7px;padding:7px;border:1px solid black;" >
+        <br />
+
+    <label for="password1" style="margin-top:7px;">Password..</label>
+    <input type="text" name="password" id="password"  style="margin-top:7px;padding:7px;border:1px solid black;">
+        <br />
+
+    <input type="submit" id="add_user_submit" value="Add" style="background-color: green;border:none;height:40px;width:70px;color:white;font-weight:bolder;">
+
+
+        <br />
+        <br />
+                <br />
+
+{{#visitcount}}
+ 
+<p id="visitcount1" class="name"> Total Visits =   {{totalvisitcount1}}</p>
+
+{{/visitcount}}
+
+
+        <input type="text" name="monthvisit" id="monthvisit"  style="margin-top:7px;padding:7px;border:1px solid black;">
+    <input type="submit" id="monthvisit_submit" value="Show" style="background-color: green;border:none;height:40px;width:70px;color:white;font-weight:bolder;">
+
+
+</div>
+

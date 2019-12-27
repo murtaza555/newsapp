@@ -8,8 +8,14 @@ import toast from '../components/toast';
 import readPost from './readPost';
 import share from '../libs/share';
 import Toast from '../components/toast';
+import { __esModule } from 'caniuse-lite';
+
+
+
 
 export default Home;
+
+
 
 function Home(path) {
 
@@ -45,7 +51,7 @@ function Home(path) {
                     buildFeed(data);
                     if (data.length >= limit) {
                         loadMore.style.display = null;
-                        loadMore.onclick = function (e) {
+                        loadMore.onclick = function(e) {
                             loadPost.bind(this)(e, url, limit);
                         };
                     } else {
@@ -135,7 +141,7 @@ function buildFeed(data, loadmore) {
         }
 
         if (actions.length > 0) $feed.querySelector('.actions').append(...actions);
-        $feed.addEventListener('click', function (e) {
+        $feed.addEventListener('click', function(e) {
             handelClick.bind(this)(e, feed);
         });
 

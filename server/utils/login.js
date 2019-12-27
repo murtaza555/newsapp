@@ -5,6 +5,14 @@ const bcrypt = require('bcrypt');
  * @param {Express.Request} req 
  * @param {Express.Response} res 
  */
+
+
+let check = 0;
+var response = {
+    status: 'ok',
+
+};
+
 function login(req, res) {
     const {
         email,
@@ -12,13 +20,41 @@ function login(req, res) {
     } = req.body;
     const errMsg = 'cannot process your request right now, please try again later';
 
+
     if (!email) {
         res.status(400).send('Email required');
     } else if (!password) {
         res.status(400).send('Password required');
     } else {
-        const query = `select password, user_id from users where email=?`;
+        const query = `select  password, user_id from users where email=?`;
         con.query(query, [email], (err, result) => {
+
+            try {
+                if (email === email) {
+
+                    bcrypt.compare(password, result[0].password).then(equal => {
+                        response = {
+                            status: 'ok_admin',
+                            email1: email
+                        };
+
+
+                    });
+                }
+            } catch (err) {
+                console.log("no email found");
+            }
+            // if (check == 1) {
+
+            //     console.log("here at murtaza3")
+            //     var response1 = {
+            //         status: 'ok_admin',
+            //         email1: email
+            //     };
+            //     res.send(response1);
+
+
+            // }
             if (err) {
                 console.log(err);
                 res.status(500).send(errMsg);
@@ -52,14 +88,24 @@ function login(req, res) {
                                 console.log(err);
                                 return res.status(500).send(errMsg);
                             }
-                            const response = {
-                                status: 'ok',
-                                msg: 'Login success',
-                                loginType: undefined
-                            };
-                            if (userid === 'admin') {
-                                response.loginType = 'admin';
+                            if (response.status == 'ok_admin') {
+
+                                response = {
+                                    status: 'ok',
+                                    msg: 'Login success',
+                                    loginType: 'mainadmin'
+                                };
+
+                            } else {
+                                response = {
+                                    status: 'ok',
+                                    msg: 'Login success',
+                                    loginType: 'admin'
+                                };
                             }
+
+
+
                             res.cookie('token', token, {
                                 maxAge,
                                 path
@@ -68,11 +114,14 @@ function login(req, res) {
                                 maxAge,
                                 path
                             });
+
                             res.send(response);
                         });
                     });
                 });
             }
+
+
         });
     }
 }

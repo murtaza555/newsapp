@@ -13,6 +13,7 @@ export default readPost;
  * 
  * @param {string} id 
  */
+
 function readPost(id) {
     if (!id) {
         return;
@@ -53,7 +54,7 @@ function readPost(id) {
 
             const action = page.get('.post-actions');
 
-            action.addEventListener('click', function (e) {
+            action.addEventListener('click', function(e) {
                 handelClick.bind(this)(e, res);
             });
 

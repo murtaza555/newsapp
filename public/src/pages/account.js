@@ -1,6 +1,8 @@
 import tag from 'html-tag-js';
 import Page from "../components/page";
 import template from '../templates/account.hbs';
+import mainadmin from '../templates/mainadmin.hbs';
+
 import ajax from '../libs/ajax';
 import Toast from '../components/toast';
 import parseQuery from '../libs/parseQuery';
@@ -29,7 +31,7 @@ function Account(type) {
 
     $email.onfocus = $password.onfocus = onfocus;
 
-    $form.onsubmit = function (e) {
+    $form.onsubmit = function(e) {
         e.preventDefault();
         $button.classList.add('loading');
         $error.textContent = '';
@@ -70,15 +72,25 @@ function Account(type) {
                 }
             })
             .then(res => {
+
                 if (res.status !== 'ok') {
                     $error.textContent = res.msg;
-                } else {
+                }
+                // if (res.status === 'ok_admin') {
+                //     console.log("here at account.hbs");
+                //     localStorage.setItem('mainadmin_storage', res.email1);
+                //     location.replace('/mainadmin');
+
+                // }
+                else {
                     let redirect = parseQuery().redirect;
+
                     if (type === 'login') {
                         Toast('login success', {
                             type: 'success'
                         });
-                        if (res.loginType === 'admin') {
+
+                        if (res.loginType === 'mainadmin') {
                             location.replace('/admin');
                         } else {
                             location.replace(redirect || '/');

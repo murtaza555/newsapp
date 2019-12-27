@@ -1,5 +1,6 @@
 import tag from 'html-tag-js';
 import pages from './pages';
+import ajax from './libs/ajax';
 
 import './defines';
 import datePicker from 'html-datepicker-js';
@@ -8,6 +9,29 @@ import datePicker from 'html-datepicker-js';
 main();
 
 function main() {
+    ajax({
+            url: '/updatevisit',
+            method: 'post',
+            contentType: 'application/json',
+        })
+        .then(res => {
+            if (res.status === 'ok') {
+
+                console.log("update done")
+
+            }
+
+            if (res.status === 'no') {
+                console.log("update not done")
+
+
+
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
     window.addEventListener('popstate', e => {
         e.preventDefault();
         const event = new CustomEvent('locationchange');
@@ -20,10 +44,10 @@ function main() {
         navigator.serviceWorker.register('/sw.js', {
                 scope: '/'
             })
-            .then(function (res) {
+            .then(function(res) {
                 console.log('Registration successful, scope is:', res.scope);
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 console.log('Service worker registration failed, error:', err);
             });
     }
@@ -47,14 +71,14 @@ function run() {
     });
     const picker = datePicker('#datepicker');
 
-    picker.onpick = function (date) {
+    picker.onpick = function(date) {
         setLocation(`/date/${date.year}-${date.monthNumber}-${date.date}`);
         hideSidenav();
         picker.hide();
     };
 
     $sidenavToggler.onclick = togglesidenav;
-    $sidenav.onclick = function (e) {
+    $sidenav.onclick = function(e) {
         hideSidenav();
         handelClick.call(this, e);
     };
