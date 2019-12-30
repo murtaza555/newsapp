@@ -21,7 +21,7 @@ const ip = require('ip').address();
 const res = path.join(__dirname, 'res');
 const js = path.join(__dirname, 'public', 'js');
 const app = express();
-const PORT = process.env.PORT || 2006;
+const PORT = process.env.PORT || 6004;
 const con = mysql.createConnection({
     host: process.env.host,
     user: process.env.user,
@@ -364,12 +364,7 @@ app.route('/post(/*)?')
         validate(req, success, error);
 
         function success(result) {
-            if (result.user_id !== 'admin') {
-                return res.send({
-                    status: 'error',
-                    msg: 'user not logged in'
-                });
-            }
+
             require('./server/utils/savepost')(req, res);
         }
 

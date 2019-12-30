@@ -15,7 +15,7 @@ function editor(element) {
     const bgColor = element.get('#bgColor');
     const image = element.get('#image');
 
-    image.addEventListener('change', function () {
+    image.addEventListener('change', function() {
         textInput.focus();
         insertImage.call(this);
     });
@@ -25,7 +25,7 @@ function editor(element) {
     bgColor.addEventListener('change', updateBgColor);
     bgColor.parentElement.addEventListener('click', updateBgColor.bind(bgColor));
 
-    textInput.addEventListener('paste', function (e) {
+    textInput.addEventListener('paste', function(e) {
         e.preventDefault();
 
         const html = e.clipboardData.getData('text/html');
@@ -43,7 +43,7 @@ function editor(element) {
         }
     });
 
-    textInput.addEventListener('drop', function (e) {
+    textInput.addEventListener('drop', function(e) {
         const data = e.dataTransfer;
         if (data.files) {
             if (data.files.length > 1) {
@@ -230,25 +230,30 @@ function insertImage() {
     const img = this.files[0];
 
     if (!img) return;
+    if (img.size > 1048576) {
+        new Compressor(img, {
+            quality: 0.1,
+            success: addImage
+        });
+    } else {
+        addImage(img)
+    }
 
-    new Compressor(img, {
-        quality: 0.1,
-        success: function (result) {
-            const filereader = new FileReader();
+    function addImage(img) {
+        const filereader = new FileReader();
 
-            filereader.onloadend = function (e) {
-                const image = e.target.result;
-                const type = image.split(';')[0].split(':')[1].split('/')[0];
+        filereader.onloadend = function(e) {
+            const image = e.target.result;
+            const type = image.split(';')[0].split(':')[1].split('/')[0];
 
-                if (type === 'image') {
-                    const imgtag = `<img src='${image}' style='max-width: 100%' alt='${img.name}'>`;
-                    exec('insertHTML', imgtag);
-                }
-            };
+            if (type === 'image') {
+                const imgtag = `<img src='${image}' style='max-width: 100%' alt='${img.name}'>`;
+                exec('insertHTML', imgtag);
+            }
+        };
 
-            filereader.readAsDataURL(result);
-        }
-    });
+        filereader.readAsDataURL(img);
+    }
 }
 
 function embed(input, selection) {
