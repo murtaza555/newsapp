@@ -6,7 +6,7 @@ function share(to, url, title) {
         case 'share':
             navigator.share({
                     title: title,
-                    text: 'read more about this article on AmWeb News',
+                    text: 'read more about this article on NewsGarden.in',
                     url
                 })
                 .then(() => console.log('shared'))
